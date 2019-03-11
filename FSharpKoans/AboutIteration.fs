@@ -20,14 +20,14 @@ module ``05: To iterate is human; to recurse, divine`` =
 
     [<Test>]
     let ``02 Tail recursion stops a stack overflow from occurring`` () =
-        // CHANGE the recursive function to be tail recursive.
-        let myfun n a =
+        // CHANGE the recursive function to be tail recursive. (tail recurse)
+        let myfun n =
             let sq = n*n
             let v = sq*sq*sq*sq
-            let rec inner count =
+            let rec inner count acc = // acc (accumilator value)
                 match count = v with
-                | true -> 0
-                | false -> -1 + inner (count+1)
-            inner sq
+                | true -> acc
+                | false -> inner (count + 1) (acc + 1)
+            inner sq 0
 
-        myfun 12 0 |> should equal 
+        myfun 12 |> should equal 429981552
