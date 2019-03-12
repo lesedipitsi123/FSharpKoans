@@ -70,10 +70,10 @@ module ``02: About Binding`` =
     [<Test>]
     let ``03 There are many types of values`` () =
         let a = 10
-        let b = 3.1
-        let c = true
-        let d = "hello"
-        let e = 'a'
+        let b = 5.5
+        let c = false
+        let d = "some text"
+        let e = 'A'
         let f = ()
         a |> should be ofType<int>
         b |> should be ofType<float>
@@ -84,12 +84,12 @@ module ``02: About Binding`` =
 
     [<Test>]
     let ``04 We can compare values using F#'s comparison operators`` () =
-        1  < 2 |> should equal true
+        1 < 2 |> should equal true
         2 > 1 |> should equal true
         1 = 1 |> should equal true
         1 <> 1 |> should equal false
         () = () |> should equal true
-        () >= () |> should equal false
+        () <> () |> should equal false
 
     [<Test>]
     let ``05 There's a `not` function instead of a `not` operator`` () =
@@ -139,9 +139,10 @@ module ``02: About Binding`` =
             3 + a
         let c = a + 4
         let a = a + a
-        a |> should equal 16
-        b |> should equal 16
-        c |> should equal 12
+
+        a |> should equal 42
+        b |> should equal 11
+        c |> should equal 25
 
    
    (*
@@ -155,17 +156,17 @@ module ``02: About Binding`` =
 
     [<Test>]
     let ``08 An identifier pattern will match anything`` () =
-        let x = 12 // replace with an integer
-        let y = "word" // replace with a string
+        let x = 21 // replace with an integer
+        let y = "really long text" // replace with a string
         let z = () // replace with anything else!
         x |> should be ofType<int>
         y |> should be ofType<string>
 
     [<Test>]
     let ``09 A wildcard pattern will match anything`` () =
-        let x = 21 // replace with an integer
-        let y = 36 // replace with a string
-        let z = 48 // replace with anything else!
+        let x = 5 // replace with an integer
+        let y = "25" // replace with a string
+        let z = 125.0 // replace with anything else!
         ()
 
     [<Test>]
@@ -177,13 +178,14 @@ module ``02: About Binding`` =
     [<Test>]
     let ``11 Constant patterns fail if the sides don't match exactly`` () =
         (fun () ->
-            let "FILL ME IN" = "RANDOM TEXT"
+            let "FILL ME IN" = "RANDOM TEXT HERE"
             ()
         ) |> should throw typeof<MatchFailureException>
 
     [<Test>]
     let ``12 Or patterns succeed if any pattern matches`` () =
-        let a | a = 'a'
+
+        let a | a = ()
         let 7 | 13 | 2 = 3 + 10
         let 'x' | _ | 'p' = 'p'
         ()
