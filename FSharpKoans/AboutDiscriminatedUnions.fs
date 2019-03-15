@@ -73,6 +73,6 @@ module ``08: The Good Kind of Discrimination`` =
             match x with
             | Empty -> 0
             | Node (_, a, b) -> 1 + max (depth a) (depth b)
-        let a = Node("1", Empty, Node("2", Empty, Node("3", Empty, Node("", Empty, Empty))))
+        let a = Node("1", Empty, Node("2", Empty, Node("3", Empty, Node("", Empty, Empty)))) //Tuple of nodes
 
         depth a |> should equal 4
